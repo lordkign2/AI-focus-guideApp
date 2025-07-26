@@ -79,10 +79,10 @@ function App() {
     }
   };
 
-  const enterDemoMode = () => {
+  const enterDemoMode = async () => {
     setDemoMode(true);
     setIsAuthenticated(true);
-    loadData();
+    await loadData();
   };
 
   const saveData = async (key, data) => {
