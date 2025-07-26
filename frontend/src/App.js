@@ -79,7 +79,23 @@ function App() {
     }
   };
 
-  const signIn = async () => {
+  const enterDemoMode = () => {
+    setDemoMode(true);
+    setIsAuthenticated(true);
+    loadData();
+  };
+
+  const saveData = async (key, data) => {
+    try {
+      if (demoMode) {
+        localStorage.setItem(key, JSON.stringify(data));
+      } else {
+        await window.puter.kv.set(key, JSON.stringify(data));
+      }
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
     try {
       setIsLoading(true);
       console.log('Starting Puter.js authentication...');
