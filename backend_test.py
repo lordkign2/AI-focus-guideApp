@@ -144,7 +144,8 @@ class AIAssistantAPITester:
         
         try:
             # The endpoint expects a query parameter
-            response = self.session.post(f"{self.base_url}/api/ai/enhance-note?note_content={test_content}")
+            encoded_content = quote(test_content)
+            response = self.session.post(f"{self.base_url}/api/ai/enhance-note?note_content={encoded_content}")
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
@@ -164,7 +165,8 @@ class AIAssistantAPITester:
         
         try:
             # The endpoint expects a query parameter
-            response = self.session.post(f"{self.base_url}/api/ai/task-suggestions?context={test_context}")
+            encoded_context = quote(test_context)
+            response = self.session.post(f"{self.base_url}/api/ai/task-suggestions?context={encoded_context}")
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
