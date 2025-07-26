@@ -133,12 +133,7 @@ function App() {
     const updatedNotes = [...notes, note];
     setNotes(updatedNotes);
     
-    try {
-      await window.puter.kv.set('ai_assistant_notes', JSON.stringify(updatedNotes));
-    } catch (error) {
-      console.error('Error saving note:', error);
-    }
-    
+    await saveData('ai_assistant_notes', updatedNotes);
     setNewNote('');
   };
 
@@ -156,12 +151,7 @@ function App() {
     const updatedTasks = [...tasks, task];
     setTasks(updatedTasks);
     
-    try {
-      await window.puter.kv.set('ai_assistant_tasks', JSON.stringify(updatedTasks));
-    } catch (error) {
-      console.error('Error saving task:', error);
-    }
-    
+    await saveData('ai_assistant_tasks', updatedTasks);
     setNewTask('');
   };
 
@@ -171,11 +161,7 @@ function App() {
     );
     setTasks(updatedTasks);
     
-    try {
-      await window.puter.kv.set('ai_assistant_tasks', JSON.stringify(updatedTasks));
-    } catch (error) {
-      console.error('Error updating task:', error);
-    }
+    await saveData('ai_assistant_tasks', updatedTasks);
   };
 
   const getAiSuggestion = async () => {
