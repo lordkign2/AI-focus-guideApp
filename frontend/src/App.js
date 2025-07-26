@@ -15,33 +15,37 @@ function App() {
     const initializePuter = async () => {
       try {
         // Wait for Puter.js to be available
-        if (typeof window.puter !== 'undefined') {
-          try {
-            const user = await window.puter.auth.getUser();
-            setIsAuthenticated(true);
-            await loadData();
-          } catch (err) {
-            console.log('User not authenticated, will need to sign in');
-            setIsAuthenticated(false);
-          }
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        while (typeof window.puter === 'undefined' && attempts < maxAttempts) {
+          await new Promise(resolve => setTimeout(resolve, 500));
+          attempts++;
+        }
+        
+        if (typeof window.puter === 'undefined') {
+          console.error('Puter.js failed to load after multiple attempts');
+          return;
+        }
+        
+        console.log('Puter.js loaded successfully');
+        
+        try {
+          const user = await window.puter.auth.getUser();
+          console.log('User already authenticated:', user);
+          setIsAuthenticated(true);
+          await loadData();
+        } catch (err) {
+          console.log('User not authenticated, will show sign in button');
+          setIsAuthenticated(false);
         }
       } catch (error) {
         console.error('Error initializing Puter:', error);
+        setIsAuthenticated(false);
       }
     };
 
-    // Check if Puter.js is loaded
-    if (typeof window.puter !== 'undefined') {
-      initializePuter();
-    } else {
-      // Wait for Puter.js to load
-      const checkPuter = setInterval(() => {
-        if (typeof window.puter !== 'undefined') {
-          clearInterval(checkPuter);
-          initializePuter();
-        }
-      }, 100);
-    }
+    initializePuter();
   }, []);
 
   const loadData = async () => {
