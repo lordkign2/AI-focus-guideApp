@@ -172,8 +172,28 @@ function App() {
       
       const prompt = `Based on my notes: ${notesContext} and tasks: ${tasksContext}, please provide a personalized daily plan and motivation for today. Keep it concise and actionable.`;
       
-      const response = await window.puter.ai.chat(prompt);
-      setAiSuggestion(response);
+      if (demoMode) {
+        // Demo mode - simulate AI response
+        const demoResponse = `Based on your current notes and tasks, here's your personalized plan:
+
+🎯 Today's Focus:
+• Complete your most important tasks first
+• Take breaks every 45-60 minutes
+• Review your progress at the end of day
+
+💡 Motivation:
+You're making great progress! Every task completed brings you closer to your goals. Stay focused and keep pushing forward!
+
+⚡ Quick Tips:
+• Prioritize tasks by importance
+• Break large tasks into smaller ones
+• Celebrate small wins throughout the day`;
+        
+        setAiSuggestion(demoResponse);
+      } else {
+        const response = await window.puter.ai.chat(prompt);
+        setAiSuggestion(response);
+      }
     } catch (error) {
       console.error('Error getting AI suggestion:', error);
       setAiSuggestion('Sorry, I couldn\'t generate suggestions right now. Please try again.');
@@ -189,8 +209,30 @@ function App() {
       
       const prompt = `Create a smart daily plan for these tasks: ${tasksContext}. Include time estimates and prioritization. Make it motivating and actionable.`;
       
-      const response = await window.puter.ai.chat(prompt);
-      setAiSuggestion(response);
+      if (demoMode) {
+        // Demo mode - simulate AI response
+        const demoResponse = `🗓️ Your Smart Daily Plan:
+
+${incompleteTasks.length > 0 ? 
+  incompleteTasks.map((task, index) => 
+    `${index + 1}. ${task.content} (⏱️ 30-45 min) - ${task.priority === 'high' ? 'HIGH PRIORITY' : 'Medium Priority'}`
+  ).join('\n') : 
+  'No pending tasks - great job! Consider adding some goals for tomorrow.'
+}
+
+⚡ Productivity Tips:
+• Start with the most challenging task
+• Use the Pomodoro Technique (25 min focus + 5 min break)
+• Keep your workspace organized
+• Stay hydrated and take regular breaks
+
+🎯 You've got this! Focus on one task at a time and make steady progress.`;
+        
+        setAiSuggestion(demoResponse);
+      } else {
+        const response = await window.puter.ai.chat(prompt);
+        setAiSuggestion(response);
+      }
     } catch (error) {
       console.error('Error generating daily plan:', error);
       setAiSuggestion('Sorry, I couldn\'t generate a daily plan right now. Please try again.');
