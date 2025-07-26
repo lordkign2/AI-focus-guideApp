@@ -142,10 +142,8 @@ class AIAssistantAPITester:
         test_content = "Meeting notes from today's standup"
         
         try:
-            # The endpoint expects a raw string as request body
-            response = self.session.post(f"{self.base_url}/api/ai/enhance-note", 
-                                       data=f'"{test_content}"',
-                                       headers={'Content-Type': 'application/json'})
+            # The endpoint expects a query parameter
+            response = self.session.post(f"{self.base_url}/api/ai/enhance-note?note_content={test_content}")
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
@@ -164,10 +162,8 @@ class AIAssistantAPITester:
         test_context = "Working on a web application project with React and FastAPI"
         
         try:
-            # The endpoint expects a raw string as request body
-            response = self.session.post(f"{self.base_url}/api/ai/task-suggestions",
-                                       data=f'"{test_context}"',
-                                       headers={'Content-Type': 'application/json'})
+            # The endpoint expects a query parameter
+            response = self.session.post(f"{self.base_url}/api/ai/task-suggestions?context={test_context}")
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
