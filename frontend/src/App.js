@@ -188,9 +188,10 @@ function App() {
           </p>
           <button
             onClick={signIn}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 glow-button"
+            disabled={isLoading}
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 glow-button disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Initialize Assistant
+            {isLoading ? 'Initializing...' : 'Initialize Assistant'}
           </button>
         </div>
       </div>
