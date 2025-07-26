@@ -8,6 +8,7 @@ import requests
 import sys
 import json
 from datetime import datetime
+from urllib.parse import quote
 
 class AIAssistantAPITester:
     def __init__(self, base_url="https://469ee993-11e2-4213-aa1e-2e3d6edbfa89.preview.emergentagent.com"):
