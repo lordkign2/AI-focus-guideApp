@@ -51,14 +51,28 @@ function App() {
 
   const loadData = async () => {
     try {
-      const savedNotes = await window.puter.kv.get('ai_assistant_notes');
-      const savedTasks = await window.puter.kv.get('ai_assistant_tasks');
-      
-      if (savedNotes) {
-        setNotes(JSON.parse(savedNotes));
-      }
-      if (savedTasks) {
-        setTasks(JSON.parse(savedTasks));
+      if (demoMode) {
+        // Demo mode - use local storage
+        const savedNotes = localStorage.getItem('ai_assistant_notes');
+        const savedTasks = localStorage.getItem('ai_assistant_tasks');
+        
+        if (savedNotes) {
+          setNotes(JSON.parse(savedNotes));
+        }
+        if (savedTasks) {
+          setTasks(JSON.parse(savedTasks));
+        }
+      } else {
+        // Puter.js mode
+        const savedNotes = await window.puter.kv.get('ai_assistant_notes');
+        const savedTasks = await window.puter.kv.get('ai_assistant_tasks');
+        
+        if (savedNotes) {
+          setNotes(JSON.parse(savedNotes));
+        }
+        if (savedTasks) {
+          setTasks(JSON.parse(savedTasks));
+        }
       }
     } catch (error) {
       console.error('Error loading data:', error);
