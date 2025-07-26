@@ -33,8 +33,12 @@ class AIAssistantAPITester:
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
-                data = response.json()
-                details += f" | Message: {data.get('message', 'N/A')}"
+                try:
+                    data = response.json()
+                    details += f" | Message: {data.get('message', 'N/A')}"
+                except:
+                    # Handle non-JSON response
+                    details += f" | Content: {response.text[:50]}..."
             self.log_test("Root Endpoint", success, details)
             return success
         except Exception as e:
