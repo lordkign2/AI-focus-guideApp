@@ -96,6 +96,8 @@ function App() {
       console.error('Error saving data:', error);
     }
   };
+
+  const signIn = async () => {
     try {
       setIsLoading(true);
       console.log('Starting Puter.js authentication...');
