@@ -1,38 +1,187 @@
-.App {
-    text-align: center;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom futuristic styles */
+.glow-text {
+  text-shadow: 0 0 10px #60a5fa, 0 0 20px #60a5fa, 0 0 30px #60a5fa;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.glow-button {
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.glow-button:hover {
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.8);
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.hero-background {
+  width: 300px;
+  height: 200px;
+  background: url('https://images.unsplash.com/photo-1618849821300-5f216d5e4937?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwyfHxob2xvZ3JhcGhpYyUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsdWV8MTc1MzUwMjI4NHww&ixlib=rb-4.1.0&q=85') center/cover;
+  border-radius: 20px;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+  animation: pulse 3s ease-in-out infinite;
 }
 
-.App-link {
-    color: #61dafb;
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 60px rgba(96, 165, 250, 0.6);
+  }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Backdrop blur for modern glass effect */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #60a5fa, #a855f7);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #3b82f6, #9333ea);
+}
+
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Floating animation for cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glowing border effect */
+.glow-border {
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, #60a5fa, #a855f7) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+}
+
+/* Futuristic input styling */
+input:focus {
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+}
+
+/* Card hover effects */
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+}
+
+/* Typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typing-animation {
+  animation: typing 2s steps(40, end);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Particle background effect */
+.particle-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #60a5fa;
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .hero-background {
+    width: 250px;
+    height: 150px;
+  }
+  
+  .glow-text {
+    font-size: 2rem;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .bg-gradient-to-br {
+    background: #1e293b !important;
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: none !important;
+  }
 }
