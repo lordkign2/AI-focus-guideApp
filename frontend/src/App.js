@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [demoMode, setDemoMode] = useState(false);
   const [notes, setNotes] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [newNote, setNewNote] = useState('');
