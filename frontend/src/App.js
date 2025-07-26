@@ -62,11 +62,24 @@ function App() {
 
   const signIn = async () => {
     try {
+      setIsLoading(true);
+      console.log('Starting Puter.js authentication...');
+      
+      // Puter.js signIn returns a promise that resolves when authentication is complete
       await window.puter.auth.signIn();
+      
+      // After successful sign in, get user to confirm authentication
+      const user = await window.puter.auth.getUser();
+      console.log('User authenticated:', user);
+      
       setIsAuthenticated(true);
       await loadData();
     } catch (error) {
       console.error('Sign in failed:', error);
+      // If authentication fails, show error but don't break the app
+      alert('Authentication failed. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
