@@ -251,13 +251,24 @@ ${incompleteTasks.length > 0 ?
           <p className="text-xl text-blue-200 mb-8">
             Your futuristic companion for organizing life, planning days, and staying motivated
           </p>
-          <button
-            onClick={signIn}
-            disabled={isLoading}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 glow-button disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? 'Initializing...' : 'Initialize Assistant'}
-          </button>
+          <div className="space-y-4">
+            <button
+              onClick={signIn}
+              disabled={isLoading}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 glow-button disabled:opacity-50 disabled:cursor-not-allowed block w-full"
+            >
+              {isLoading ? 'Initializing...' : 'Initialize Assistant'}
+            </button>
+            <button
+              onClick={enterDemoMode}
+              className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:scale-105 block w-full"
+            >
+              Try Demo Mode
+            </button>
+            <p className="text-sm text-gray-400 mt-4">
+              Demo mode uses simulated AI responses for testing
+            </p>
+          </div>
         </div>
       </div>
     );
