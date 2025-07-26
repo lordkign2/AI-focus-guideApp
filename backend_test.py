@@ -138,13 +138,17 @@ class AIAssistantAPITester:
         test_content = "Meeting notes from today's standup"
         
         try:
-            # Note: The endpoint expects a string, not JSON object
-            response = self.session.post(f"{self.base_url}/api/ai/enhance-note", json=test_content)
+            # The endpoint expects a raw string as request body
+            response = self.session.post(f"{self.base_url}/api/ai/enhance-note", 
+                                       data=f'"{test_content}"',
+                                       headers={'Content-Type': 'application/json'})
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
                 data = response.json()
                 details += f" | Enhanced: {len(data.get('enhanced', ''))} chars"
+            else:
+                details += f" | Response: {response.text[:100]}"
             self.log_test("Enhance Note", success, details)
             return success
         except Exception as e:
@@ -156,12 +160,17 @@ class AIAssistantAPITester:
         test_context = "Working on a web application project with React and FastAPI"
         
         try:
-            response = self.session.post(f"{self.base_url}/api/ai/task-suggestions", json=test_context)
+            # The endpoint expects a raw string as request body
+            response = self.session.post(f"{self.base_url}/api/ai/task-suggestions",
+                                       data=f'"{test_context}"',
+                                       headers={'Content-Type': 'application/json'})
             success = response.status_code == 200
             details = f"Status: {response.status_code}"
             if success:
                 data = response.json()
                 details += f" | Suggestions: {len(data.get('suggestions', []))}"
+            else:
+                details += f" | Response: {response.text[:100]}"
             self.log_test("Task Suggestions", success, details)
             return success
         except Exception as e:
