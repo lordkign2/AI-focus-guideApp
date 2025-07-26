@@ -82,7 +82,10 @@ function App() {
   const enterDemoMode = async () => {
     setDemoMode(true);
     setIsAuthenticated(true);
-    await loadData();
+    // Small delay to ensure state is updated
+    setTimeout(() => {
+      loadData();
+    }, 100);
   };
 
   const saveData = async (key, data) => {
