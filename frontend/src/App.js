@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [demoMode, setDemoMode] = useState(false);
